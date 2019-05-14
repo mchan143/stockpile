@@ -1,0 +1,13 @@
+---
+
+- id: d97dfdb2-a2cb-430d-84fa-de676b5f75aa
+  name: Find private keys in /home/<>/.ssh (nix)
+  description: Find private keys in user's home directories.
+  tactic: credential-access
+  technique:
+    attack_id: T1145
+    name: Private Keys
+  executors:
+    bash:
+      command: |
+        find /home -path '*/.ssh/*' -type f -exec cat '{}' \;

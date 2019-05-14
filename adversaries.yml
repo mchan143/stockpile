@@ -27,3 +27,15 @@
         2:
           - 85341c8c-4ecb-4579-8f53-43e3e91d7617
           - c0da588f-79f0-4263-8998-7496b1a40596
+    - name: mission3 (stockpile)
+      description: Bash SSH lateral movement and cron persistence
+      phases:
+        1:
+          - d97dfdb2-a2cb-430d-84fa-de676b5f75aa # cat .ssh
+          - 7369d2b0-88b4-48e3-b837-1ad0dbf0f02f # ssh lateral movement
+        2:
+          - ee6d70cf-a2c8-47b5-b42c-db46174c0082 # find interesting files
+        3:
+          - c1e4f8f1-cb97-4d41-9621-32e5b81c70cf  # cron persistence
+
+

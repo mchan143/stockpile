@@ -1,0 +1,13 @@
+---
+
+- id: ee6d70cf-a2c8-47b5-b42c-db46174c0082
+  name: Find sensitive files (bash)
+  description: Find .caldera in /home
+  tactic: credential-access
+  technique:
+    attack_id: T1005
+    name: Data from Local System
+  executors:
+    bash:
+      command: |
+        find /home -path '*.caldera' -type f -exec cat '{}' \;
