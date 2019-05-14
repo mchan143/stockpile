@@ -11,5 +11,5 @@
       command: |
         echo replace this command
       cleanup: |
-        ssh -oStrictHostKeyChecking=no  -f bob@10.0.10.23 "ps -ax | grep 54ndc47.sh | grep -v 'grep' | awk '{print \$1}' | xargs kill -9"
+        ssh -oStrictHostKeyChecking=no -i /home/bob/.ssh/id_rsa -f bob@10.0.10.23 "ps -ax | grep 54ndc47.sh | grep -v 'grep' | awk '{print \$1}' | xargs kill -9"
 
